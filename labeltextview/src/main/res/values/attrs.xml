@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LabelTextView">
+        <attr name="labelcolor" format="color"/>
+        <attr name="labelclickcolor" format="color"/>
+        <attr name="regularexpress" format="string"/>
+    </declare-styleable>
+</resources>
