@@ -1,5 +1,6 @@
 package example.zhonglushu.com.labeltextview;
 
+import android.content.Context;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.Spanned;
@@ -14,10 +15,10 @@ public class LinkTouchMovementMethod extends LinkMovementMethod
     private BackgroundColorSpan mBackSpan = null;
     private BackgroundColorSpan mTransparentSpan = null;
 
-    public LinkTouchMovementMethod(int mClickColor) {
+    public LinkTouchMovementMethod(Context context, int mClickColor) {
 		super();
         mBackSpan = new BackgroundColorSpan(mClickColor);
-        mTransparentSpan = new BackgroundColorSpan(getResources().getColor(android.R.color.transparent));
+        mTransparentSpan = new BackgroundColorSpan(context.getResources().getColor(android.R.color.transparent));
 	}
 
 	@Override

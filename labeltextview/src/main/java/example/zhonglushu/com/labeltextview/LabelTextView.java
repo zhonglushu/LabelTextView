@@ -85,7 +85,7 @@ public class LabelTextView extends TextView {
             style.setSpan(new LabelClickSpan(matcher.group(), mLabelColor, mLabelClickListener), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         this.setText(style);
-        this.setMovementMethod(new LinkTouchMovementMethod(mLabelClickColor));// 设置超链接为可点击状态
+        this.setMovementMethod(new LinkTouchMovementMethod(getContext(), mLabelClickColor));// 设置超链接为可点击状态
     }
 
     /**
