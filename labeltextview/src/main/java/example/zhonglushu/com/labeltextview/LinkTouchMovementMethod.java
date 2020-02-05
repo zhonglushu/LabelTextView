@@ -17,7 +17,7 @@ public class LinkTouchMovementMethod extends LinkMovementMethod
     public LinkTouchMovementMethod(int mClickColor) {
 		super();
         mBackSpan = new BackgroundColorSpan(mClickColor);
-        mTransparentSpan = new BackgroundColorSpan(android.R.color.transparent);
+        mTransparentSpan = new BackgroundColorSpan(getResources().getColor(android.R.color.transparent));
 	}
 
 	@Override
