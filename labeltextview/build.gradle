@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 28
@@ -32,6 +33,29 @@ android {
         //htmlReport true
         // html报告可选路径(构建器默认是lint-results.html )
         //htmlOutput file("../lint-report2.html")
+    }
+}
+
+checkstyle {
+//    configFile rootProject.file('checkstyle.xml')
+    ignoreFailures false
+    showViolations true
+    toolVersion '8.12'
+}
+
+task checkstyle(type: Checkstyle) {
+//    configFile rootProject.file('checkstyle.xml')
+    source 'src/main/java'
+    ignoreFailures false
+    showViolations true
+    include '**/*.java'
+    classpath = files()
+}
+
+// adds checkstyle task to existing check task
+afterEvaluate {
+    if (project.tasks.getByName("check")) {
+        check.dependsOn('checkstyle')
     }
 }
 

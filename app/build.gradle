@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 28
@@ -36,10 +37,37 @@ android {
     }
 }
 
+checkstyle {
+//    configFile rootProject.file('checkstyle.xml')
+    ignoreFailures false
+    showViolations true
+    toolVersion '8.12'
+}
+
+task checkstyle(type: Checkstyle) {
+//    configFile rootProject.file('checkstyle.xml')
+    source 'src/main/java'
+    ignoreFailures false
+    showViolations true
+    include '**/*.java'
+    classpath = files()
+}
+
+// adds checkstyle task to existing check task
+afterEvaluate {
+    if (project.tasks.getByName("check")) {
+        check.dependsOn('checkstyle')
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:28.0.0'
     compile 'com.android.support:design:28.0.0'
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+//    compile group: 'com.google.guava', name: 'guava', version: '25.1-jre'
+    // https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE
+//    compile group: 'net.sf.saxon', name: 'Saxon-HE', version: '9.8.0-12'
     compile project(':labeltextview')
 }
