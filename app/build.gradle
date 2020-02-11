@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
+apply plugin: 'pmd'
 
 android {
     compileSdkVersion 28
@@ -38,14 +39,14 @@ android {
 }
 
 checkstyle {
-//    configFile rootProject.file('checkstyle.xml')
+    configFile rootProject.file('config/checkstyle/checkstyle.xml')
     ignoreFailures false
     showViolations true
     toolVersion '8.12'
 }
 
 task checkstyle(type: Checkstyle) {
-//    configFile rootProject.file('checkstyle.xml')
+    configFile rootProject.file('config/checkstyle/checkstyle.xml')
     source 'src/main/java'
     ignoreFailures false
     showViolations true
@@ -53,10 +54,32 @@ task checkstyle(type: Checkstyle) {
     classpath = files()
 }
 
+task pmd(type: Pmd) {
+    ignoreFailures = false
+    ruleSetFiles = files("${project.rootDir}/config/pmd/pmd-rulesets.xml")
+    ruleSets = []
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+//        xml {
+//            destination "$reportsDir/pmd/pmd.xml"
+//        }
+//        html {
+//            destination "$reportsDir/pmd/pmd.html"
+//        }
+    }
+}
+
 // adds checkstyle task to existing check task
 afterEvaluate {
     if (project.tasks.getByName("check")) {
         check.dependsOn('checkstyle')
+        check.dependsOn('pmd')
     }
 }
 
