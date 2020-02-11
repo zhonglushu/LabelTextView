@@ -61,6 +61,13 @@ public class LabelTextView extends TextView {
         }else{
             mLabelClickColor = getContext().getResources().getColor(android.R.color.holo_red_light);
         }
+        a.recycle();
+        //test for findbugs
+        Object mObject = getObjectObject();
+    }
+
+    private Object getObjectObject() {
+        return null;
     }
 
     @Override
