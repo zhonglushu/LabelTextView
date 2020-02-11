@@ -14,4 +14,6 @@
     <rule ref="category/java/errorprone.xml/CallSuperLast" deprecated="true" />
     <rule ref="category/java/errorprone.xml/DoNotHardCodeSDCard" deprecated="true" />
 
+    <rule ref="rulesets/java/quickstart.xml" />
+
 </ruleset>
